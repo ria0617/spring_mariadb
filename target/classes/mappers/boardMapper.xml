@@ -5,7 +5,7 @@
 	<!-- 글쓰기 -->
 	<insert id="write">
 		INSERT INTO RE_BOARD (BNO, TITLE, CONTENT, WRITER)
-		VALUES (RE_BOARD_SEQ.NEXTVAL, #{title}, #{content}, #{writer})
+		VALUES (NEXTVAL(RE_BOARD_SEQ), #{title}, #{content}, #{writer})
 	</insert>
 	
 	<!-- 목록조회 -->
