@@ -1,0 +1,82 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardMapper">
+	<!-- 글쓰기 -->
+	<insert id="write">
+		INSERT INTO RE_BOARD (BNO, TITLE, CONTENT, WRITER)
+		VALUES (RE_BOARD_SEQ.NEXTVAL, #{title}, #{content}, #{writer})
+	</insert>
+	
+	<!-- 목록조회 -->
+	<select id="listPage" resultType="com.src.domain.BoardVO" parameterType="com.src.domain.SearchCriteria">
+		SELECT BNO, TITLE, WRITER, REGDATE, HIT, TOTALPUSH
+		FROM (
+				SELECT BNO, TITLE, WRITER, REGDATE, HIT, TOTALPUSH,
+				ROW_NUMBER() OVER(ORDER BY BNO DESC) AS RNUM
+				FROM RE_BOARD
+				WHERE 1=1
+				<include refid="search"></include>
+				) RE
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY BNO DESC
+	</select>
+	
+	<!-- 게시물 총 갯수 조회 -->
+	<select id="listCount" resultType="int" parameterType="com.src.domain.SearchCriteria">
+		SELECT COUNT(BNO)
+		FROM RE_BOARD
+		WHERE 1=1
+		<include refid="search"></include>
+		AND BNO > 0
+	</select>
+	
+	<!-- 게시글 검색 -->
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">AND TITLE LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'c'.toString()">AND CONTENT LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'w'.toString()">AND WRITER LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'tc'.toString()">AND (TITLE LIKE '%' || #{keyword} || '%') or (CONTENT LIKE '%' || #{keyword} || '%')</if>
+		</if>
+	</sql>
+	
+	<!-- 글보기  -->
+	<select id="read" parameterType="int" resultType="com.src.domain.BoardVO">
+		SELECT BNO, TITLE, CONTENT, WRITER, REGDATE
+		FROM RE_BOARD
+		WHERE BNO = #{bno}
+	</select>
+	
+	<!-- 글 수정 -->
+	<update id="update" parameterType="com.src.domain.BoardVO">
+		UPDATE RE_BOARD
+		SET 
+			TITLE = #{title},
+			CONTENT = #{content}
+		 WHERE BNO = #{bno} 
+	</update>
+	
+	<!-- 글삭제 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM RE_BOARD
+		WHERE BNO = #{bno}
+	</delete>
+	
+	<!-- 게시판 조회수 -->
+	<update id="boardHit" parameterType="int">
+		UPDATE RE_BOARD 
+		SET
+		HIT = HIT+1
+		WHERE BNO = #{bno}
+	</update>
+	
+	<!-- 게시판 총 추천수 -->
+	<update id="boardTotalPust" parameterType="com.src.domain.BoardVO">
+		UPDATE RE_BOARD 
+		SET
+		TOTALPUSH = #{totalpush}
+		WHERE BNO = #{bno}
+	</update>
+	
+</mapper>

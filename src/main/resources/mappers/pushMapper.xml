@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pushMapper">
+	
+	<!-- 추천하기 -->
+	<insert id="pushIn">
+		insert into push (bno, push_no, user_id)
+		VALUES (#{bno}, PUSH_SEQ.nextval, #{userId})
+	</insert>
+	
+	<!-- 추천글 확인 -->
+	<select id="pushCheck" resultType="int" >
+		select count(*)
+		from push
+		where bno = #{bno}
+		and user_id = #{userId}
+	</select>
+
+	<!-- 총 추천수 -->
+	<select id="totalPush" resultType="int" >
+		select count(bno)
+		from push
+		where bno= #{bno}
+	</select>
+	
+	<!-- 추천회수 -->
+	<delete id="pushOut">
+		delete from push
+		where bno = #{bno}
+		and user_id = #{userId}
+	</delete>
+
+</mapper>

@@ -1,0 +1,90 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MBoardMapper">
+
+	<!-- 글쓰기 -->
+	<insert id="movieWrite">
+		INSERT INTO MOVIE_BOARD (MOVIE_ID, M_TITLE, M_CONTENT, M_WRITER, post_img, post_thumbimg, category_id)
+		VALUES (M_BOARD_SEQ.NEXTVAL, #{m_title}, #{m_content}, #{m_writer}, #{post_img}, #{post_thumbimg}, #{category_id})
+	</insert>
+	
+	<!-- 목록조회 -->
+	<select id="movieListPage" resultType="com.src.domain.MBoardVO" parameterType="com.src.domain.SearchCriteria">
+		SELECT MOVIE_ID, M_TITLE, M_WRITER, M_DATE, M_HIT, post_img, post_thumbimg, category_id
+		FROM (
+				SELECT MOVIE_ID, M_TITLE, M_WRITER, M_DATE, M_HIT, post_img, post_thumbimg, category_id,
+				ROW_NUMBER() OVER(ORDER BY MOVIE_ID DESC) AS RNUM
+				FROM MOVIE_BOARD
+				WHERE 1=1
+				<include refid="search"></include>
+				) RE
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY MOVIE_ID DESC
+	</select>
+	
+	<!-- 게시물 총 갯수 조회 -->
+	<select id="movieListCount" resultType="int" parameterType="com.src.domain.SearchCriteria">
+		SELECT COUNT(MOVIE_ID)
+		FROM MOVIE_BOARD
+		WHERE 1=1
+		<include refid="search"></include>
+		AND MOVIE_ID > 0
+	</select>
+	
+	<!-- 게시글 검색 -->
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">AND M_TITLE LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'c'.toString()">AND M_CONTENT LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'w'.toString()">AND M_WRITER LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'tc'.toString()">AND (M_TITLE LIKE '%' || #{keyword} || '%') or (M_CONTENT LIKE '%' || #{keyword} || '%')</if>
+		</if>
+	</sql>
+	
+	<!-- 글보기  -->
+	<select id="movieRead" parameterType="int" resultType="com.src.domain.MBoardVO">
+		SELECT MOVIE_ID, M_TITLE, M_CONTENT, M_WRITER, M_DATE, post_img, post_thumbimg, category_id
+		FROM MOVIE_BOARD
+		WHERE MOVIE_ID = #{movie_id}
+	</select>
+	
+	<!-- 글 수정 -->
+	<update id="movieUpdate" parameterType="com.src.domain.MBoardVO">
+		UPDATE MOVIE_BOARD
+		SET 
+			M_TITLE = #{m_title},
+			M_CONTENT = #{m_content},
+			post_img = #{post_img}, 
+			post_thumbimg = #{post_thumbimg},
+			category_id = #{category_id}
+		 WHERE MOVIE_ID = #{movie_id} 
+	</update>
+	
+	<!-- 글삭제 -->
+	<delete id="movieDelete" parameterType="int">
+		DELETE FROM MOVIE_BOARD
+		WHERE MOVIE_ID = #{movie_id}
+	</delete>
+	
+	<!-- 게시판 조회수 -->
+	<update id="movieBoardHit" parameterType="int">
+		UPDATE MOVIE_BOARD 
+		SET
+		M_HIT = M_HIT+1
+		WHERE MOVIE_ID = #{movie_id}
+	</update>
+	
+	<!-- 카테고리 전체 조회 -->
+	<select id="categoryList" resultType="com.src.domain.CategoryVO" parameterType="com.src.domain.CategoryVO">
+		SELECT CATEGORY_ID, CATEGORY_NAME
+		FROM CATEGORY
+	</select>
+	
+	<!-- 특정 카테고리 조회 -->
+	<select id="searchCategoty" resultType="com.src.domain.CategoryVO" parameterType="com.src.domain.CategoryVO">
+		SELECT CATEGORY_NAME
+		FROM CATEGORY
+		WHERE CATEGORY_ID  = #{category_id}
+	</select>
+</mapper>
