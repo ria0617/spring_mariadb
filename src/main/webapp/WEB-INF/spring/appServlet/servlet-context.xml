@@ -66,7 +66,7 @@
 	<!-- 이미지 첨부파일 -->
 	<!-- 업로드 패스 설정 --> 
 	<beans:bean class="java.lang.String" id="uploadPath">
-		<beans:constructor-arg value="C:\mycode3\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\spring\resources" />
+		<beans:constructor-arg value="C:\mycode3\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\spring_maria\resources" />
 	</beans:bean>
 	
 	<!-- 일반 파일 업로드 경로 -->
