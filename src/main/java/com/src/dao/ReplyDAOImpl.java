@@ -46,5 +46,11 @@ public class ReplyDAOImpl implements ReplyDAO{
 	public ReplyVO selectReply(int rno) throws Exception {
 		return sql.selectOne(namespace + ".selectReply", rno);
 	}
+	
+	//글 댓글 전체 삭제
+	@Override
+	public void deleteAllReply(ReplyVO replyVO) throws Exception {
+		sql.delete(namespace + ".deleteAllReply", replyVO);
+	}
 
 }

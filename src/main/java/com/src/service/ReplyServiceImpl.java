@@ -44,5 +44,11 @@ public class ReplyServiceImpl implements ReplyService {
 	public ReplyVO selectReply(int rno) throws Exception {
 		return dao.selectReply(rno);
 	}
+	
+	//글 댓글 전체 삭제
+	@Override
+	public void deleteAllReply(ReplyVO replyVO) throws Exception {
+		dao.deleteAllReply(replyVO);
+	}
 
 }

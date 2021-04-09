@@ -31,6 +31,12 @@
 		WHERE RNO = #{rno}
 	</delete>
 	
+	<!-- 글 댓글 전체 -->
+	<delete id="deleteAllReply" parameterType="com.src.domain.ReplyVO">
+		DELETE FROM RE_REPLY
+		WHERE BNO = #{bno}
+	</delete>
+	
 	<!-- 선택된 댓글 조회 -->
 	<select id="selectReply" resultType="com.src.domain.ReplyVO">
 		SELECT BNO, RNO, CONTENT, WRITER, REGDATE

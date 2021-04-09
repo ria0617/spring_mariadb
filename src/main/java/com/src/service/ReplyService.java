@@ -20,4 +20,7 @@ public interface ReplyService {
 	
 	//선택 댓글 조회
 	public ReplyVO selectReply(int rno) throws Exception;
+	
+	//글 댓글 전체 삭제
+	public void deleteAllReply(ReplyVO replyVO) throws Exception;
 }

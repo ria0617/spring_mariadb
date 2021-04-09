@@ -37,4 +37,10 @@ public class PushServiceImpl implements PushService {
 		dao.pushOut(pushVO);
 	}
 	
+	//글 추천 모두 회수 
+	@Override
+	public void pushAllOut(PushVO pushVO) throws Exception {
+		dao.pushAllOut(pushVO);
+	}
+	
 }

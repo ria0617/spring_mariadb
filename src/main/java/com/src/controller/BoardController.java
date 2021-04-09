@@ -131,8 +131,12 @@ public class BoardController {
 
 	// 게시판 삭제
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public String delete(BoardVO boardVO, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr) throws Exception{
+	public String delete(BoardVO boardVO, PushVO pushVO, ReplyVO replyVO, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr) throws Exception{
 		logger.info("게시글 삭제");
+		replyVO.setBno(boardVO.getBno());
+		pushVO.setBno(boardVO.getBno());
+		replyService.deleteAllReply(replyVO); //딸린 댓글 삭제
+		pushService.pushAllOut(pushVO); //딸린 추천 삭제
 		service.delete(boardVO.getBno());
 		
 		rttr.addAttribute("page", scri.getPage());

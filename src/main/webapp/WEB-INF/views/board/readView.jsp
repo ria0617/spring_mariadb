@@ -121,6 +121,7 @@ alert ("스크랩되었습니다");
 							<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
 							<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
 						</form>
+						<c:if test="${not empty read.bno}">
 						<div class="form-group">
 							<label class="small mb-1" for="bno">글 번호</label>
 							${read.bno}&nbsp;&nbsp;|&nbsp;&nbsp;
@@ -140,6 +141,19 @@ alert ("스크랩되었습니다");
 						<div class="form-group py-4">
 							${read.content}
 						</div>
+						</c:if>
+						<!-- 스크랩 한 글이 삭제되었을 때 -->
+						<c:if test="${empty read.bno}">
+							<div class="form-group py-4">
+								이미 삭제된 글 입니다
+							</div>
+							<div class="dropdown-divider"></div>
+							<div class="float-right">
+								<button class="btn btn-dark " type="submit" onclick="pageListClick()">목록으로</button>
+							</div>
+						</c:if>
+						<!-- 스크랩 한 글이 삭제되었을 때 끝-->
+						<c:if test="${not empty read.bno}">
 						<div class="dropdown-divider"></div>
 						<div class="form-group align-items-center justify-content-between mt-4 mb-0">
 							<c:if test="${not empty login}">
@@ -163,7 +177,9 @@ alert ("스크랩되었습니다");
 								<button class="btn btn-dark " type="submit" onclick="pageListClick()">목록으로</button>
 							</div>
 						</div>
+						</c:if>
 					</div>
+					<c:if test="${not empty read.bno}">
 					<!-- 댓글 기능 전체 -->
 					<div class="card-footer text-left">
 						<c:if test="${not empty login}">
@@ -234,6 +250,7 @@ alert ("스크랩되었습니다");
 						<!-- 댓글 보기 끝 -->
 					</div>
 					<!-- 댓글 전체 끝 -->
+					</c:if>
 				</div>
 			</div>
 

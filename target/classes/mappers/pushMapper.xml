@@ -31,5 +31,10 @@
 		where bno = #{bno}
 		and user_id = #{userId}
 	</delete>
-
+	
+	<!-- 모든 추천 회수 -->
+	<delete id="pushAllOut">
+		delete from push
+		where bno = #{bno}
+	</delete>
 </mapper>

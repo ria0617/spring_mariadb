@@ -15,5 +15,8 @@ public interface PushService {
 	
 	//추천회수
 	public void pushOut(PushVO pushVO) throws Exception;
+	
+	//글 추천 모두 회수 
+	public void pushAllOut(PushVO pushVO) throws Exception;
 
 }
