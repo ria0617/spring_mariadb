@@ -15,8 +15,8 @@
 
 	<!-- 회원가입 -->
 	<insert id="register">
-		INSERT INTO MEMBER_BOARD(USER_ID , PW , EMAIL, MEMBER_DATE, M_STATE )
-		VALUES( #{userId} , #{pw}, #{email}, SYSDATE, 'join')
+		INSERT INTO MEMBER_BOARD(USER_ID , PW , EMAIL, M_STATE )
+		VALUES( #{userId} , #{pw}, #{email}, 'join')
 	</insert>
 	
 	<!-- 로그인: 회원 정보를 검색 -->

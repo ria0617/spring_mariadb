@@ -67,7 +67,6 @@ public class MemberController {
 				
 				//암호화된 비밀번호를 다시 회원 객체에 저장
 				userVO.setPw(hashedPW);
-				
 				//서비스 회원가입 메서드 호출
 				userService.register(userVO);
 			}
@@ -261,11 +260,12 @@ public class MemberController {
 		}
 		//형변환 시키기
 		String imsiSPw = imsiPw.toString();
+		System.out.println("임시비밀번호" +imsiSPw);
 		
 		//비밀번호 암호화 처리 
 		String hashedPW = BCrypt.hashpw(imsiSPw, BCrypt.gensalt());
 		userVO.setPw(hashedPW);
-		
+
 		userService.updatePw(userVO);
 		
 		//이메일 보내기
