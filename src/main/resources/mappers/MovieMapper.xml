@@ -6,7 +6,7 @@
 	<!-- 글쓰기 -->
 	<insert id="movieWrite">
 		INSERT INTO MOVIE_BOARD (MOVIE_ID, M_TITLE, M_CONTENT, M_WRITER, post_img, post_thumbimg, category_id)
-		VALUES (NEXTVAL(M_BOARD_SEQ), #{m_title}, #{m_content}, #{m_writer}, #{post_img}, #{post_thumbimg}, #{category_id})
+		VALUES (nextval_seq('movie_board_seq'), #{m_title}, #{m_content}, #{m_writer}, #{post_img}, #{post_thumbimg}, #{category_id})
 	</insert>
 	
 	<!-- 목록조회 -->

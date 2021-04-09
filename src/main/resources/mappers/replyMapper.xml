@@ -15,7 +15,7 @@
 	<!-- 댓글 작성 -->
 	<insert id="writeReply">
 		INSERT INTO RE_REPLY(BNO, RNO, CONTENT, WRITER)
-		VALUES(#{bno}, NEXTVAL(RE_REPLY_SEQ), #{content}, #{writer})
+		VALUES(#{bno}, nextval_seq('re_reply_seq'), #{content}, #{writer})
 	</insert>
 
 	<!-- 댓글 수정 -->

@@ -14,7 +14,7 @@
 	<!-- 스크랩 저장 -->
 	<insert id="scrapIn">
 		INSERT INTO SCRAP (SCRAP_ID, USER_ID, SCRAP_TITLE, SCRAP_AD)
-		VALUES (NEXTVAL(SCRAP_SEQ), #{userId}, #{scrapTitle}, #{scrapAd})
+		VALUES (nextval_seq('scrap_seq'), #{userId}, #{scrapTitle}, #{scrapAd})
 	</insert>
 	
 	<!-- 스크랩 목록 -->

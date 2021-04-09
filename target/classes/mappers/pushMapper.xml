@@ -7,7 +7,7 @@
 	<!-- 추천하기 -->
 	<insert id="pushIn">
 		insert into push (bno, push_no, user_id)
-		VALUES (#{bno}, NEXTVAL(PUSH_SEQ), #{userId})
+		VALUES (#{bno}, nextval_seq('push_seq'), #{userId})
 	</insert>
 	
 	<!-- 추천글 확인 -->
