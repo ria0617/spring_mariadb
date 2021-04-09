@@ -76,15 +76,11 @@ public class UserDAOImpl implements UserDAO {
 	public void updatePw(UserVO userVO) throws Exception {
 		sql.update(namespace + ".updatePw", userVO);
 	}
-
-//	@Override
-//	public void updateRecommendActiveTime(String userId) throws Exception {
-//		sql.update(namespace + ".updateRecommendActiveTime", userId);
-//		
-//	}
-//
-//	@Override
-//	public Timestamp checkRecommendActiveTime(String userId) throws Exception {
-//		return sql.selectOne(namespace + ".checkRecommendActiveTime");
-//	}
+	
+	//랭크 조회
+	@Override
+	public int rankChk(String userId) throws Exception {
+		int result = sql.selectOne(namespace + ".rankChk", userId);
+		return result;
+	}
 }

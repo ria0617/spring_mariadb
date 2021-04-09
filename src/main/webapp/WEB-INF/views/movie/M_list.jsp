@@ -24,7 +24,7 @@
 						소개된 영화: ${pageMaker.totalCount}
 					</li>
 				</ol>
-				<c:if test="${not empty login}">
+				<c:if test="${rank == 1}">
 					<div class="form-row">
 						<div class="col-md-12">
 							<div class="form-group float-right">

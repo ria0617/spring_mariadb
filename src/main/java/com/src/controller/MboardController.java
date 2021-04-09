@@ -21,6 +21,7 @@ import com.src.domain.CategoryVO;
 import com.src.domain.MBoardVO;
 import com.src.domain.PageMaker;
 import com.src.domain.SearchCriteria;
+import com.src.domain.UserVO;
 import com.src.service.MBoardService;
 import com.src.service.UserService;
 import com.src.utils.UploadFileUtils;
@@ -42,14 +43,21 @@ public class MboardController {
 	
 	// 영화 소개 글 작성 화면
 	@RequestMapping(value = "/M_writeView", method = RequestMethod.GET)
-	public void MwriteView(CategoryVO categoryVO, Model model) throws Exception{
+	public String MwriteView(CategoryVO categoryVO, Model model, HttpSession httpsession) throws Exception{
+		UserVO login = (UserVO) httpsession.getAttribute("login");
+		String sessionId = login.getUserId();
+		int rank = userService.rankChk(sessionId);
+		if(rank != 1) {
+			return "redirect:/movie/M_list";
+		}
 		model.addAttribute("category",Mservice.categoryList());
-		logger.info("영화 소개 글 작성 화면");
+		return "/movie/M_writeView";
 	}
 	
 	// 영화 소개 글 작성
 	@RequestMapping(value = "/M_write", method = RequestMethod.POST)
 	public String Mwrite(CategoryVO categoryVO, MBoardVO mboardVO, MultipartFile file) throws Exception{
+
 		//이미지 첨부파일
 		String imgUploadPath = uploadPath + File.separator + "imgUpload";
 		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
@@ -71,10 +79,17 @@ public class MboardController {
 
 	// 영화 소개 목록 조회
 	@RequestMapping(value = "/M_list", method = RequestMethod.GET)
-	public String Mlist(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception{
+	public String Mlist(UserVO userVO, Model model, @ModelAttribute("scri") SearchCriteria scri, HttpSession httpSession) throws Exception{
 		logger.info("영화 소개글 목록");
 		model.addAttribute("mlist",Mservice.movieListPage(scri));
 		
+		UserVO login = (UserVO) httpSession.getAttribute("login");
+		if (login != null) {
+			String sessionId = login.getUserId();
+			int rank = userService.rankChk(sessionId);
+			model.addAttribute("rank", rank);
+		}
+
 		//페이징
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(scri);

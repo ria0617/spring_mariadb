@@ -8,8 +8,15 @@ public class UserVO {
 	private String email;
 	private Timestamp memberDate;
 	private String mState;
+	private int rank;
 
 	
+	public int getRank() {
+		return rank;
+	}
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
 	public String getUserId() {
 		return userId;
 	}
@@ -44,7 +51,7 @@ public class UserVO {
 	@Override
 	public String toString() {
 		return "UserVO [userId=" + userId + ", pw=" + pw + ", email=" + email + ", memberDate=" + memberDate
-				+ ", mState=" + mState + ", u_recommend_active_time=" + "]";
+				+ ", mState=" + mState + ", rank=" + rank + "]";
 	}
 
 	

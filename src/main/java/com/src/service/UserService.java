@@ -33,11 +33,8 @@ public interface UserService {
 	//비밀번호 변경
 	public void updatePw(UserVO userVO) throws Exception;
 	
-//	// 추천 후, 추천 활성화 시간 업데이트
-//	public void updateRecommendActiveTime(String userId) throws Exception;
-//
-//	// 추천 활성화 시간 조회
-//	public Timestamp checkRecommendActiveTime(String userId) throws Exception;
+	//랭크 조회
+	public int rankChk(String userId) throws Exception;
 
 
 }

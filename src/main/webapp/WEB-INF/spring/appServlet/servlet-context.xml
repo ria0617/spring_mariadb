@@ -40,8 +40,13 @@
 		<mvc:interceptor>
 			<!-- 로그인 했을 때만 접근 가능한 페이지 경로 -->
 			<mvc:mapping path="/board/writeView"/>
+			<mvc:mapping path="/board/myScrap"/>
 			<mvc:mapping path="/board/updateView"/>
 			<mvc:mapping path="/board/myScrap"/>
+			<mvc:mapping path="/member/userBlockView"/>
+			<mvc:mapping path="/member/userModifyView"/>
+			<mvc:mapping path="/movie/M_updateView"/>
+			<mvc:mapping path="/movie/M_writeView"/>
 			<beans:ref bean = "authInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>

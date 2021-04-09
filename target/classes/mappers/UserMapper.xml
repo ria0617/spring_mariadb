@@ -79,5 +79,10 @@
 		WHERE EMAIL = #{email}
 	</update>
 	
-	
+	<!-- 권한 조회 -->
+	<select id="rankChk" resultType="int">
+		SELECT rank
+		FROM MEMBER_BOARD
+		WHERE USER_ID = #{userId}
+	</select>
 </mapper>

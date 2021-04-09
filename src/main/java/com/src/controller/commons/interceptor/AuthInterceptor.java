@@ -12,7 +12,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 	
 	private static final Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
 	
-	//페이지 요청 정보 저장 (스크랩 주소 따실때 참고하세요)
+	//페이지 요청 정보 저장 
 	private void saveDestination (HttpServletRequest request) {
 		
 		// 객체에 주소를 저장 (uri는 루트 뒤의 주소)

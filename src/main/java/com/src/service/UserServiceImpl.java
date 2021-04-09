@@ -81,5 +81,12 @@ public class UserServiceImpl implements UserService {
 	public void updatePw(UserVO userVO) throws Exception {
 		userDAO.updatePw(userVO);
 	}
+	
+	//랭크 조회
+	@Override
+	public int rankChk(String userId) throws Exception {
+		int result = userDAO.rankChk(userId);
+		return result;
+	}
 
 }
