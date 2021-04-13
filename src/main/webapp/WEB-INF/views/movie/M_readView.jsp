@@ -62,12 +62,6 @@ function pageListClick(){
 								<div class="form-group font-weight-bold">
 									<h3>[${category.category_name}] ${mread.m_title}</h3>
 								</div>
-								<div class="form-row">
-									<div class="col-md-2 col-sm-12">기본정보: 미국, 106분&nbsp;&nbsp;</div>
-									<div class="col-md-2 col-sm-12">개봉일: 2016.02.17&nbsp;&nbsp;</div>
-									<div class="col-md-2 col-sm-12">등급: 청소년 관람불가&nbsp;&nbsp;</div>
-									<div class="col-md-2 col-sm-12">감독: 팀 밀러</div>
-								</div>
 								<div class="form-row pt-4">
 									<div class="col-md-9">${mread.m_content}</div>
 								</div>
