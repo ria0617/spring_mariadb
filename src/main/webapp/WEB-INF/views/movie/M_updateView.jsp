@@ -52,7 +52,7 @@
 								<input class="form-control py-4" id="m_title" name="m_title" type="text" value="${mupdate.m_title}"/>
 							</div>
 							<div class="form-group">
-								<textarea class="hidden form-control py-4"  id="m_content" name="m_content" ><c:out value="${mupdate.m_content}" /></textarea>
+								<textarea class="form-control py-4"  name="m_content" id="m_content" rows="10" cols="100"><c:out value="${mupdate.m_content}" /></textarea>
 							</div>
 							<!-- 이미지 첨부파일 시작 -->
 							<div class="form-group">
@@ -64,23 +64,12 @@
 										<input type="hidden" name="post_thumbimg" value="${mupdate.post_thumbimg}" />
 										<input type="hidden" name="post_img" value="${mupdate.post_img}" />
 									</div>
-									<script>
-									$("#postImg").change(function(){
-										if(this.files && this.files[0]) {
-											var reader = new FileReader;
-											reader.onload = function(data) {
-											 $(".select_img img").attr("src", data.target.result).width(500);
-										}
-											reader.readAsDataURL(this.files[0]);
-										}
-									});
-									</script>
 									<!--%=request.getRealPath("/") %-->
 								</div>
 							</div>
 							<!-- 이미지 첨부파일 끝 -->
 							<div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-									<button class="btn btn-success" type="submit" class="mupdate_btn">수정</button>
+									<button id="savebutton" class="btn btn-success" type="submit" class="mupdate_btn">수정</button>
 									<a class="btn btn-dark"  href="/movie/M_list">목록으로</a>
 							</div>
 						</form>
@@ -92,7 +81,7 @@
 		<%@ include file="../include/main_footer.jsp" %>
 	</div>
 </div>
-
+<%@ include file="../js/editor_js_movie.jsp" %>
 <%@ include file="../include/plugin_js.jsp" %>
 
 </body>

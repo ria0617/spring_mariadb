@@ -11,15 +11,11 @@
 	<!-- 목록조회 -->
 	<select id="listPage" resultType="com.src.domain.BoardVO" parameterType="com.src.domain.SearchCriteria">
 		SELECT BNO, TITLE, WRITER, REGDATE, HIT, TOTALPUSH
-		FROM (
-				SELECT BNO, TITLE, WRITER, REGDATE, HIT, TOTALPUSH,
-				ROW_NUMBER() OVER(ORDER BY BNO DESC) AS RNUM
-				FROM RE_BOARD
-				WHERE 1=1
-				<include refid="search"></include>
-				) RE
-		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		FROM re_board
+		WHERE 1=1
+		<include refid="search"></include>
 		ORDER BY BNO DESC
+		LIMIT 20 OFFSET #{rowStart}
 	</select>
 	
 	<!-- 게시물 총 갯수 조회 -->

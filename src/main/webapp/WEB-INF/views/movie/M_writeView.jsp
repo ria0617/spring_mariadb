@@ -40,7 +40,7 @@
 				
 				<div class="card shadow-lg border-0 rounded-lg">
 					<div class="card-body">
-						<form role="form" method="post" action="/movie/M_write" enctype="multipart/form-data">
+						<form id="WriteForm" role="form" method="post" action="/movie/M_write" enctype="multipart/form-data">
 							<div class="form-row">
 								<div class="col-md-6">
 									<div class="form-group">
@@ -64,7 +64,7 @@
 							</div>
 							<div class="form-group">
 								<label class="small mb-1" >내용</label>
-								<textarea  class="form-control py-4"  id="m_content" name="m_content" ></textarea>
+								<textarea class="form-control py-4"  name="m_content" id="m_content" rows="10" cols="100"></textarea>
 							</div>
 							<!-- 이미지 첨부파일 시작 -->
 							<div class="form-group">
@@ -72,23 +72,12 @@
 									<label class="small mb-1" for="postImg">포스터이미지</label><br/>
 									<input class="py-2" type="file" id="postImg" name="file" />
 									<div class="select_img"><img src="" /></div>
-									<script>
-									$("#postImg").change(function(){
-										if(this.files && this.files[0]) {
-											var reader = new FileReader;
-											reader.onload = function(data) {
-											 $(".select_img img").attr("src", data.target.result).width(500);
-										}
-											reader.readAsDataURL(this.files[0]);
-										}
-									});
-									</script>
 									<!--%=request.getRealPath("/") %-->
 								</div>
 							</div>
 							<!-- 이미지 첨부파일 끝 -->
 							<div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-									<button class="btn btn-primary"  type="submit">글 작성하기</button>
+									<button id="savebutton"  class="btn btn-primary"  type="submit">글 작성하기</button>
 									<a class="btn btn-dark"  href="/movie/M_list">목록으로</a>
 							</div>
 						</form>
@@ -100,7 +89,7 @@
 		<%@ include file="../include/main_footer.jsp" %>
 	</div>
 </div>
-
+<%@ include file="../js/editor_js_movie.jsp" %>
 <%@ include file="../include/plugin_js.jsp" %>
 
 </body>
