@@ -92,12 +92,4 @@
   + 제목을 누르면 해당 스크랩 페이지로 이동합니다
   + 이미 삭제된 글의 경우 삭제된 글이라는 페이지로 이동합니다 
 
-## 기여 방법
-
-1. (https://github.com/ria0617/spring_mariadb.git)을 포크합니다.
-2. (`git checkout -b feature/fooBar`) 명령어로 새 브랜치를 만드세요.
-3. (`git commit -am 'Add some fooBar'`) 명령어로 커밋하세요.
-4. (`git push origin feature/fooBar`) 명령어로 브랜치에 푸시하세요. 
-5. 풀리퀘스트를 보내주세요.
-
 
